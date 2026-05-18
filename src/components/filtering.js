@@ -24,6 +24,14 @@ export function initFiltering(elements, indexes) {
             state[field] = "";
         }
 
-        return data.filter(row => compare(row, state));
+        const filterState = {
+            ...state,
+            total: [state.totalFrom, state.totalTo]
+        };
+
+        delete filterState.totalFrom;
+        delete filterState.totalTo;
+
+        return data.filter(item => compare(item, filterState));
     }
 }
